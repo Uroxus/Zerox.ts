@@ -1,0 +1,24 @@
+{
+  "name": "oceanictemplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "scripts": {
+    "start": "node Build/index.js",
+    "dev": "set NODE_ENV=development&& npm run start"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "oceanic.js": "^0.0.11-dev.f9f6584"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.15",
+    "@types/ws": "^8.5.3"
+  }
+}
