@@ -1,4 +1,5 @@
 import type { ClientEvents } from "oceanic.js";
+import type BotClient from "./Client";
 
 export abstract class Event {
     public name: keyof ClientEvents;
@@ -9,5 +10,5 @@ export abstract class Event {
         this.once = once;
     };
 
-    public invoke ( ...args: any ) { }
+    public invoke ( Client: BotClient, ...args: any ) { }
 }
