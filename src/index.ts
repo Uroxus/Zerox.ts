@@ -1,6 +1,4 @@
-import { Client } from "oceanic.js";
-import ClientOptions from "./Constants/ClientOptions.js";
+import BotClient from "./Classes/Client";
 
-const client = new Client( ClientOptions );
-client.on( "ready", () => console.log( "Connected" ) );
+const client = new BotClient();
 client.connect();
