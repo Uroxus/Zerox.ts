@@ -4,7 +4,7 @@ import type BotClient from "../Classes/Client.js";
 
 export default class Ready extends Event {
     constructor() {
-        super( "ready" );
+        super( "ready", true );
     }
 
     public invoke ( Client: BotClient ): void {
