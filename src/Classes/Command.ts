@@ -1,4 +1,4 @@
-import type { CommandInteraction, Message } from "oceanic.js";
+import type { AnyTextChannel, CommandInteraction, Message } from "oceanic.js";
 
 export abstract class Command {
     public commandName: string;
@@ -11,7 +11,7 @@ export abstract class Command {
         console.debug( `Received Slash command for ${ this.commandName }` );
     }
 
-    public textCommand ( Message: Message ) {
+    public textCommand ( Message: Message<AnyTextChannel> ) {
         console.debug( `Received Text command for ${ this.commandName }` );
     }
 
