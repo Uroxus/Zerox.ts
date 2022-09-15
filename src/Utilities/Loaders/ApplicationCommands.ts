@@ -1,6 +1,7 @@
 import fetchFiles from "../FileFetch.js";
-import { Collection, CreateApplicationCommandOptions, RESTManager } from "oceanic.js";
+import { Collection } from "oceanic.js";
 import type BotClient from "../../Classes/Client.js";
+import type { CreateApplicationCommandOptions } from "oceanic.js";
 
 export async function loadApplicationCommands ( Client: BotClient ) {
     const CommandDefinitions = new Collection();
