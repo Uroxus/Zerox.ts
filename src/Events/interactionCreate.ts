@@ -1,5 +1,5 @@
 import { Event } from "../Classes/Event.js";
-import { InteractionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes } from "oceanic.js";
+import { InteractionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ComponentInteraction } from "oceanic.js";
 import type { ApplicationCommandInteractionResolvedData, CommandInteraction } from "oceanic.js";
 import type { AnyInteractionGateway } from "oceanic.js";
 import type BotClient from "../Classes/Client.js";
@@ -19,7 +19,6 @@ export default class InteractionCreate extends Event {
                 const commandName = commandCacheKey( interactionArgs );
                 const Command: Command = Client.CommandMap.get( commandName );
 
-                console.log( commandName, Command );
                 switch ( Interaction.data.type ) {
                     case ApplicationCommandTypes.CHAT_INPUT:
                         Command.slashCommand( CommandInteraction );
@@ -34,6 +33,14 @@ export default class InteractionCreate extends Event {
                 break;
 
             case InteractionTypes.MESSAGE_COMPONENT:
+                const ComponentInteraction: ComponentInteraction = Interaction;
+
+                if ( Client.ComponentMap.has( Interaction.data.customID ) ) {
+                    Client.ComponentMap.get( ComponentInteraction.data.customID )( ComponentInteraction );
+                } else {
+                    console.error( `Component Interaction ${ Interaction.data.customID } received with no handler` );
+                }
+
                 break;
         }
     }
