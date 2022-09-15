@@ -16,10 +16,10 @@ export abstract class Command {
     }
 
     public messageContext ( Interaction: CommandInteraction ) {
-        console.debug( `Received Text command for ${ this.commandName }` );
+        console.debug( `Received Message Context command for ${ this.commandName }` );
     }
 
     public userContext ( Interaction: CommandInteraction ) {
-        console.debug( `Received Text command for ${ this.commandName }` );
+        console.debug( `Received User Context command for ${ this.commandName }` );
     }
 }
