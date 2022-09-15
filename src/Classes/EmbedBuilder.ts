@@ -1,8 +1,8 @@
-import { EmbedColors } from "../Constants/EmbedColors";
-import type { Embed, EmbedField } from "oceanic.js";
+import { EmbedColors } from "../Constants/EmbedColors.js";
+import type { EmbedField, EmbedOptions } from "oceanic.js";
 
 export default class EmbedBuilder {
-    public embed: Embed;
+    public embed: EmbedOptions;
 
     constructor() {
         this.embed = {
@@ -90,5 +90,9 @@ export default class EmbedBuilder {
     timestamp () {
         this.embed.timestamp = new Date().toString();
         return this;
+    }
+
+    toJSON () {
+        return this.embed;
     }
 }

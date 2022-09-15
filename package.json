@@ -7,7 +7,7 @@
   "description": "",
   "type": "module",
   "engines": {
-    "node": ">=16.14.0"
+    "node": ">=16.16.0"
   },
   "scripts": {
     "start": "node Build/index.js",
