@@ -1,6 +1,6 @@
 import { fetch } from "undici";
 import Environment from "../Constants/Environment";
-import Listings from "../Constants/Listings";
+import Listings from "../Constants/Listings.js";
 import type { Client } from "oceanic.js";
 
 /**
