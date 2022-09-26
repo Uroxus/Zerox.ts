@@ -19,23 +19,26 @@ export default class InteractionCreate extends Event {
 
                 const commandName = commandCacheKey( interactionArgs );
                 const Command: Command = Client.CommandMap.get( commandName );
-
-                switch ( Interaction.data.type ) {
-                    case ApplicationCommandTypes.CHAT_INPUT:
-                        interactionCommandCount.inc( { "type": "CHAT_INPUT", "command": commandName } );
-                        Command.slashCommand( CommandInteraction );
-                        break;
-                    case ApplicationCommandTypes.MESSAGE:
-                        interactionCommandCount.inc( { "type": "MESSAGE_CONTEXT", "command": commandName } );
-                        Command.messageContext( CommandInteraction );
-                        break;
-                    case ApplicationCommandTypes.USER:
-                        interactionCommandCount.inc( { "type": "USER_CONTEXT", "command": commandName } );
-                        Command.userContext( CommandInteraction );
-                        break;
+                if ( Command ) {
+                    switch ( Interaction.data.type ) {
+                        case ApplicationCommandTypes.CHAT_INPUT:
+                            interactionCommandCount.inc( { "type": "CHAT_INPUT", "command": commandName } );
+                            Command.slashCommand( CommandInteraction );
+                            break;
+                        case ApplicationCommandTypes.MESSAGE:
+                            interactionCommandCount.inc( { "type": "MESSAGE_CONTEXT", "command": commandName } );
+                            Command.messageContext( CommandInteraction );
+                            break;
+                        case ApplicationCommandTypes.USER:
+                            interactionCommandCount.inc( { "type": "USER_CONTEXT", "command": commandName } );
+                            Command.userContext( CommandInteraction );
+                            break;
+                    }
+                    break;
+                } else {
+                    console.error( `Received application command of type ${ Interaction.data.type } for "${ commandName }" but found no handler` );
+                    break;
                 }
-                break;
-
             case InteractionTypes.MESSAGE_COMPONENT:
                 const ComponentInteraction: ComponentInteraction = Interaction;
 
