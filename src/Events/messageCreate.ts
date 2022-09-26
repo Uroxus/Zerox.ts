@@ -1,6 +1,7 @@
 import { Event } from "../Classes/Event.js";
 import EmbedBuilder from "../Classes/EmbedBuilder.js";
 import { ChannelTypes } from "oceanic.js";
+import { textCommandCount } from "../Prometheus/Metrics/Command.js";
 import type BotClient from "../Classes/Client.js";
 import type { AnyTextChannel, Message } from "oceanic.js";
 
@@ -20,9 +21,11 @@ export default class MessageCreate extends Event {
                 const commandArgs = getCommandArgs( Message );
 
                 if ( Client.CommandMap.has( `${ commandArgs[ 0 ] } ${ commandArgs[ 1 ] }` ) ) { // Accounts for sub commands
+                    textCommandCount.inc( { command: `${ commandArgs[ 0 ] } ${ commandArgs[ 1 ] }` } );
                     Client.CommandMap.get( `${ commandArgs[ 0 ] } ${ commandArgs[ 1 ] }` ).textCommand( Message );
 
                 } else if ( Client.CommandMap.has( `${ commandArgs[ 0 ] }` ) ) {
+                    textCommandCount.inc( { command: commandArgs[ 0 ] } );
                     Client.CommandMap.get( `${ commandArgs[ 0 ] }` ).textCommand( Message );
                 }
 

@@ -1,5 +1,6 @@
 import { Event } from "../Classes/Event.js";
 import { InteractionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ComponentInteraction } from "oceanic.js";
+import { componentCommandCount, interactionCommandCount } from "../Prometheus/Metrics/Command.js";
 import type { ApplicationCommandInteractionResolvedData, CommandInteraction } from "oceanic.js";
 import type { AnyInteractionGateway } from "oceanic.js";
 import type BotClient from "../Classes/Client.js";
@@ -21,12 +22,15 @@ export default class InteractionCreate extends Event {
 
                 switch ( Interaction.data.type ) {
                     case ApplicationCommandTypes.CHAT_INPUT:
+                        interactionCommandCount.inc( { "type": "CHAT_INPUT", "command": commandName } );
                         Command.slashCommand( CommandInteraction );
                         break;
                     case ApplicationCommandTypes.MESSAGE:
+                        interactionCommandCount.inc( { "type": "MESSAGE_CONTEXT", "command": commandName } );
                         Command.messageContext( CommandInteraction );
                         break;
                     case ApplicationCommandTypes.USER:
+                        interactionCommandCount.inc( { "type": "USER_CONTEXT", "command": commandName } );
                         Command.userContext( CommandInteraction );
                         break;
                 }
@@ -36,6 +40,7 @@ export default class InteractionCreate extends Event {
                 const ComponentInteraction: ComponentInteraction = Interaction;
 
                 if ( Client.ComponentMap.has( Interaction.data.customID ) ) {
+                    componentCommandCount.inc( { "name": ComponentInteraction.data.customID } );
                     Client.ComponentMap.get( ComponentInteraction.data.customID )( ComponentInteraction );
                 } else {
                     console.error( `Component Interaction ${ Interaction.data.customID } received with no handler` );
