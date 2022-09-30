@@ -5,13 +5,13 @@ export default class Database {
 
     constructor( url: string ) {
         this.url = url;
+
+        this.connect();
     }
 
     async connect () {
-        let connection;
-
         try {
-            connection = await mongoose.connect( this.url );
+            await mongoose.connect( this.url );
         } catch ( error ) {
             console.error( `Database failed to connect: ${ error }` );
         }
