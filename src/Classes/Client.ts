@@ -15,7 +15,7 @@ export default class BotClient extends Client {
     constructor() {
         super( ClientOptions );
 
-        this.Database = new Database( process.env.NODE_ENV === Environment.DEV ? process.env.DEV_URL : process.env.PROD_URL );
+        this.Database = new Database( process.env.NODE_ENV === Environment.DEV ? process.env.DEV_MONGO_URL : process.env.PROD_MONGO_URL );
 
         this.CommandMap = new Collection();
         this.ComponentMap = new Collection();
