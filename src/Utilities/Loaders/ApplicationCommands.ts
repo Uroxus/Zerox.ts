@@ -1,5 +1,6 @@
 import fetchFiles from "../FileFetch.js";
 import { Collection } from "oceanic.js";
+import { Logger } from "../Logger.js";
 import type BotClient from "../../Classes/Client.js";
 import type { CreateApplicationCommandOptions } from "oceanic.js";
 
@@ -14,15 +15,14 @@ export async function loadApplicationCommands ( Client: BotClient ) {
             const cacheKey = definitionCacheKey( CommandDefinition );
 
             if ( !CommandDefinitions.has( cacheKey ) ) {
-                console.log( cacheKey );
                 CommandDefinitions.set( cacheKey, CommandDefinition );
             } else {
-                console.error( `Duplicate Application command definition name ${ cacheKey }` );
+                Logger.error( `Duplicate Application command definition name ${ cacheKey }`, { source: "Loaders/ApplicationCommands.js" } );
             }
         }
     }
-    Client.application.bulkEditGlobalCommands( CommandDefinitions.toArray() as CreateApplicationCommandOptions[] ).catch( err => {
-        console.error( `Failed to bulk edit Global commands: ${ err }` );
+    Client.application.bulkEditGlobalCommands( CommandDefinitions.toArray() as CreateApplicationCommandOptions[] ).catch( ( error ) => {
+        Logger.error( `Failed to bulk edit Global commands`, { source: "Loaders/ApplicationCommands.js", error: error } );
     } );
 }
 

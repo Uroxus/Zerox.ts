@@ -1,5 +1,6 @@
 import { Command } from "../../Classes/Command.js";
 import { Message, AnyTextChannel, CommandInteraction, ComponentTypes } from "oceanic.js";
+import { Logger } from "../../Utilities/Logger.js";
 import DeleteParent from "../../Components/DeleteParent.js";
 
 export default class Test extends Command {
@@ -17,8 +18,8 @@ export default class Test extends Command {
                     ]
                 }
             ]
-        } ).catch( err => {
-            console.error( `Failed to respond to Test textCommand: ${ err }` );
+        } ).catch( ( error ) => {
+            Logger.error( `Failed to respond to Test textCommand`, { source: "test.handler.js", error: error } );
         } );
     }
 

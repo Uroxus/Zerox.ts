@@ -1,6 +1,7 @@
 import { Event } from "../Classes/Event.js";
 import EmbedBuilder from "../Classes/EmbedBuilder.js";
 import { ChannelTypes } from "oceanic.js";
+import { Logger } from "../Utilities/Logger.js";
 import { textCommandCount } from "../Prometheus/Metrics/Command.js";
 import type BotClient from "../Classes/Client.js";
 import type { AnyTextChannel, Message } from "oceanic.js";
@@ -38,7 +39,7 @@ export default class MessageCreate extends Event {
                             .description( `**Hello 👋**\nThis is a bot` )
                             .toJSON()
                         ]
-                } ).catch( err => console.error( `Failed to respond to client ping: ${ err }` ) );
+                } ).catch( ( error ) => Logger.error( `Failed to respond to client ping`, { source: "messageCreate.js", error: error } ) );
             }
         }
     }

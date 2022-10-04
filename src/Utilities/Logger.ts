@@ -22,6 +22,9 @@ const errorFileTransport = new transports.DailyRotateFile( {
     "format": jsonFormat
 } );
 
+const grey = `\u001b[90m`;
+const white = `\u001b[0m`;
+
 export const Logger = createLogger( {
     "transports": [
         new transports.Console( {
@@ -31,7 +34,7 @@ export const Logger = createLogger( {
                 format.timestamp( { "format": "DD/MM/YY HH:mm:ss" } ),
                 format.colorize(),
                 format.align(),
-                format.printf( info => `\u001b[90m[${ info.timestamp.split( " " )[ 0 ] }] [${ info.timestamp.split( " " )[ 1 ] }] [\u001b[0m${ info.level }\u001b[90m] »\u001b[0m ${ info.message }` )
+                format.printf( ( { level, message, ...meta } ) => `${ grey }[${ meta.timestamp.split( " " )[ 0 ] }] [${ meta.timestamp.split( " " )[ 1 ] }] ${ meta?.source ? `[${ meta.source }] ` : '' }[${ level }${ grey }] »${ white } ${ message }` )
             ),
             "stderrLevels": [ "error", "warning" ]
         } ),

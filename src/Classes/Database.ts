@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Logger } from "../Utilities/Logger.js";
 
 export default class Database {
     private url: string;
@@ -13,11 +14,11 @@ export default class Database {
         try {
             await mongoose.connect( this.url );
         } catch ( error ) {
-            console.error( `Database failed to connect: ${ error }` );
+            Logger.error( `Database failed to connect`, { source: "Database.js", error: error } );
         }
 
-        mongoose.connection.on( "error", ( error ) => console.error( `Database connection errored: ${ error }` ) );
-        mongoose.connection.on( "disconnected", ( error ) => console.error( `Database connection dropped: ${ error }` ) );
-        mongoose.connection.on( "connected", () => console.log( "Database connection established" ) );
+        mongoose.connection.on( "error", ( error ) => Logger.error( `Database connection errored`, { source: "Database.js", error: error } ) );
+        mongoose.connection.on( "disconnected", ( error ) => Logger.error( `Database connection dropped`, { source: "Database.js", error: error } ) );
+        mongoose.connection.on( "connected", () => Logger.info( "Database connection established", { source: "Database.js" } ) );
     }
 }

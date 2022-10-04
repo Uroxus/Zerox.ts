@@ -1,6 +1,7 @@
 import { fetch } from "undici";
 import Environment from "../Constants/Environment";
 import Listings from "../Constants/Listings.js";
+import { Logger } from "../Utilities/Logger.js";
 import type { Client } from "oceanic.js";
 
 /**
@@ -11,7 +12,7 @@ export async function manageListings ( Client: Client ) {
     if ( process.env.NODE_ENV === Environment.PROD ) {
         loopSiteListings( Client );
 
-        console.info( `Starting bot listings update interval` );
+        Logger.info( `Starting bot listings update interval`, { source: "Listings.js" } );
         setInterval( () => {
             loopSiteListings( Client );
         }, 1800000 );
@@ -45,7 +46,7 @@ async function updateStats ( Client: Client, siteListingKey: string ) {
         "body": JSON.stringify( {
             [ listing.payloadKey ]: Client.guilds.size
         } )
-    } ).catch( error => {
-        console.error( `Failed to update stats on ${ siteListingKey }: ${ error }` );
+    } ).catch( ( error ) => {
+        Logger.error( `Failed to update stats on ${ siteListingKey }`, { source: "Listings.js", error: error } );
     } );
 }; 
