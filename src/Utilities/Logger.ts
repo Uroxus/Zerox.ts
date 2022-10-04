@@ -1,5 +1,6 @@
 import { createLogger, transports, format } from "winston";
 import "winston-daily-rotate-file";
+import Environment from "../Constants/Environment";
 
 const jsonFormat = format.combine( format.timestamp( { "format": "HH:mm:ss DD-MM-YY" } ), format.json() );
 
@@ -26,6 +27,7 @@ const grey = `\u001b[90m`;
 const white = `\u001b[0m`;
 
 export const Logger = createLogger( {
+    "level": process.env.NODE_ENV === Environment.PROD ? "info" : "debug",
     "transports": [
         new transports.Console( {
             "format": format.combine(
