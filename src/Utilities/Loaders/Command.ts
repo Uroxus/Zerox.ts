@@ -3,6 +3,10 @@ import { Logger } from "../Logger.js";
 import type { Command } from "../../Classes/Command.js";
 import type BotClient from "../../Classes/Client.js";
 
+/**
+ * Cache the command handler commandNames which hopefully match up with an active application command definition
+ * @param Client 
+ */
 export async function loadCommands ( Client: BotClient ) {
     for await ( const file of fetchFiles( "./Commands/" ) ) {
         if ( file.includes( ".handler" ) ) {

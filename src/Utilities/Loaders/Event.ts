@@ -3,6 +3,10 @@ import type BotClient from "../../Classes/Client.js";
 import type { Event } from "../../Classes/Event.js";
 import type { ClientEvents } from "oceanic.js";
 
+/**
+ * Load and initiate all of the Client events
+ * @param Client 
+ */
 export async function loadEvents ( Client: BotClient ) {
     for await ( const file of fetchFiles( "./Events/" ) ) {
         const { "default": EventFile } = await import( file );

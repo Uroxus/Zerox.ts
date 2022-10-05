@@ -4,6 +4,10 @@ import { Logger } from "../Logger.js";
 import type BotClient from "../../Classes/Client.js";
 import type { CreateApplicationCommandOptions } from "oceanic.js";
 
+/**
+ * Create an arraay of application command definitions to publish on shard 0 ready
+ * @param Client 
+ */
 export async function loadApplicationCommands ( Client: BotClient ) {
     const CommandDefinitions = new Collection();
 
