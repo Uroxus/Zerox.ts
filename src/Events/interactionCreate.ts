@@ -1,5 +1,6 @@
 import { Event } from "../Classes/Event.js";
 import { InteractionTypes, ApplicationCommandOptionTypes, ApplicationCommandTypes, ComponentInteraction } from "oceanic.js";
+import { Logger } from "../Utilities/Logger.js";
 import { componentCommandCount, interactionCommandCount } from "../Prometheus/Metrics/Command.js";
 import type { ApplicationCommandInteractionResolvedData, CommandInteraction } from "oceanic.js";
 import type { AnyInteractionGateway } from "oceanic.js";
@@ -36,7 +37,7 @@ export default class InteractionCreate extends Event {
                     }
                     break;
                 } else {
-                    console.error( `Received application command of type ${ Interaction.data.type } for "${ commandName }" but found no handler` );
+                    Logger.error( `Received application command of type ${ Interaction.data.type } for "${ commandName }" but found no handler`, { source: "interactionCreate.js" } );
                     break;
                 }
             case InteractionTypes.MESSAGE_COMPONENT:
@@ -46,7 +47,7 @@ export default class InteractionCreate extends Event {
                     componentCommandCount.inc( { "name": ComponentInteraction.data.customID } );
                     Client.ComponentMap.get( ComponentInteraction.data.customID )( ComponentInteraction );
                 } else {
-                    console.error( `Component Interaction ${ Interaction.data.customID } received with no handler` );
+                    Logger.error( `Component Interaction ${ Interaction.data.customID } received with no handler`, { source: "interactionCreate.js" } );
                 }
 
                 break;

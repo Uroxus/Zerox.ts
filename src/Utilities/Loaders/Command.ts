@@ -1,4 +1,5 @@
 import fetchFiles from "../FileFetch.js";
+import { Logger } from "../Logger.js";
 import type { Command } from "../../Classes/Command.js";
 import type BotClient from "../../Classes/Client.js";
 
@@ -12,7 +13,7 @@ export async function loadCommands ( Client: BotClient ) {
             if ( !Client.CommandMap.has( commandInstance.commandName ) ) {
                 Client.CommandMap.set( commandInstance.commandName, commandInstance );
             } else {
-                console.error( `Attempted to load duplicate command ${ commandInstance.commandName } - no changes were made` );
+                Logger.error( `Attempted to load duplicate command ${ commandInstance.commandName } - no changes were made` );
             }
         }
     }
