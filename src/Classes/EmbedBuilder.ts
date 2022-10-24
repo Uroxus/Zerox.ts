@@ -49,7 +49,7 @@ export default class EmbedBuilder {
      * Define multiple Embed fields in one call
      * @param fields The fields to add to the embed
      */
-    fields ( fields: [ EmbedField ] ) {
+    fields ( fields: EmbedField[] ) {
         this.embed.fields = fields;
         return this;
     }
