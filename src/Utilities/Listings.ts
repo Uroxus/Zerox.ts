@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Manages posting the number of guilds the bot is in to voting sites
+ */
+
 import { fetch } from "undici";
 import Environment from "../Constants/Environment";
 import Listings from "../Constants/Listings.js";
@@ -10,11 +15,11 @@ import type { Client } from "oceanic.js";
  */
 export async function manageListings ( Client: Client ) {
     if ( process.env.NODE_ENV === Environment.PROD ) {
-        loopSiteListings( Client );
+        _loopSiteListings( Client );
 
         Logger.info( `Starting bot listings update interval`, { source: "Listings.js" } );
         setInterval( () => {
-            loopSiteListings( Client );
+            _loopSiteListings( Client );
         }, 1800000 );
     }
 };
@@ -24,9 +29,9 @@ export async function manageListings ( Client: Client ) {
  * sites that have an Authorization key provided in the env
  * @param Client 
  */
-function loopSiteListings ( Client: Client ) {
+function _loopSiteListings ( Client: Client ) {
     for ( const siteListingKey of Object.keys( Listings ).filter( ( siteAuth ) => siteAuth in process.env ) ) {
-        updateStats( Client, siteListingKey );
+        _updateStats( Client, siteListingKey );
     }
 }
 
@@ -35,7 +40,7 @@ function loopSiteListings ( Client: Client ) {
  * @param Client Bot client reference to retrieve the number of guilds from
  * @param siteListingKey The object key from the Listings constants to update the stats of
  */
-async function updateStats ( Client: Client, siteListingKey: string ) {
+async function _updateStats ( Client: Client, siteListingKey: string ) {
     const listing = Listings[ siteListingKey ];
 
     await fetch( listing.endpoint.replace( ":id", Client.user.id ), {

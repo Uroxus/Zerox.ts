@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Creates a webserver, listening on the .env defined PORT, which is used to handle user votes and Prometheus metric scraping
+ */
+
 import dotenv from "dotenv";
 dotenv.config();
 

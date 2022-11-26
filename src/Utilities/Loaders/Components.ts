@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Load and cache all Component definitions in ./Components/ by their customID value
+ */
+
 import fetchFiles from "../FileFetch.js";
 import { Logger } from "../Logger.js";
 import type BotClient from "../../Classes/Client.js";
