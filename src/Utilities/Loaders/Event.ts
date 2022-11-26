@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Load all Client event handlers from ./Events/
+ */
+
 import fetchFiles from "../FileFetch.js";
 import type BotClient from "../../Classes/Client.js";
 import type { Event } from "../../Classes/Event.js";

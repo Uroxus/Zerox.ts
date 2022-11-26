@@ -1,3 +1,7 @@
+/**
+ * @file Define a /metrics route on the webserver which Prometheus can serve metrics on
+ */
+
 import Express from "express";
 import { Registry } from 'prom-client';
 

@@ -1,3 +1,9 @@
+/**
+ * @file
+ * Define the information required by bot listing sites to automatically manage guild count
+ * Each will only post if there is a .env entry with the xxx_AUTH key
+ */
+
 import type { Listing } from "../Types";
 
 const Listings: { [ siteToken: string ]: Listing; } = {

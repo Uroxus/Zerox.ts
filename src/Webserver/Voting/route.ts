@@ -1,3 +1,8 @@
+/**
+ * @file 
+ * Defines a /vote route on the webserver which will listen for and handle vote requests
+ */
+
 import Express from "express";
 import handleVote from "./VoteHandler.js";
 

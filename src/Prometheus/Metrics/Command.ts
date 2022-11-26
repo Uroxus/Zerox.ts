@@ -1,3 +1,7 @@
+/**
+ * @file Metric definitions relating to bot command usage
+ */
+
 import { Register, AppName } from '../route.js';
 import { Counter } from 'prom-client';
 

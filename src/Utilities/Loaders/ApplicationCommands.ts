@@ -1,3 +1,7 @@
+/**
+ * @file
+ * Read all .definition files from ./Commands/ and bulk publish them
+ */
 import fetchFiles from "../FileFetch.js";
 import { Collection } from "oceanic.js";
 import { Logger } from "../Logger.js";
@@ -5,7 +9,7 @@ import type BotClient from "../../Classes/Client.js";
 import type { CreateApplicationCommandOptions } from "oceanic.js";
 
 /**
- * Create an arraay of application command definitions to publish on shard 0 ready
+ * Create an array of application command definitions to publish on shard 0 ready
  * @param Client 
  */
 export async function loadApplicationCommands ( Client: BotClient ) {

@@ -1,3 +1,8 @@
+/**
+ * @file
+ * Load all .handler files from ./Commands/ and cache the defined commandName
+ */
+
 import fetchFiles from "../FileFetch.js";
 import { Logger } from "../Logger.js";
 import type { Command } from "../../Classes/Command.js";

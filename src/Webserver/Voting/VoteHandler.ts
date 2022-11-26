@@ -1,3 +1,8 @@
+/**
+ * @file 
+ * Defines the actions when a new vote has been received
+ */
+
 import { Logger } from "../../Utilities/Logger.js";
 import type { Request } from "express";
 
