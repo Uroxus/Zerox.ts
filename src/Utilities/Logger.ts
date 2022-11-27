@@ -6,9 +6,9 @@
 import { createLogger } from "winston";
 import Environment from "../Constants/Environment";
 
-import allFileTransport from "./Transports/AllLogFile";
-import consoleTransport from "./Transports/Console";
-import errorLogFileTransport from "./Transports/ErrorFile";
+import allFileTransport from "./Transports/AllLogFile.js";
+import consoleTransport from "./Transports/Console.js";
+import errorLogFileTransport from "./Transports/ErrorFile.js";
 
 export const Logger = createLogger( {
     "level": process.env.NODE_ENV === Environment.PROD ? "info" : "debug",
