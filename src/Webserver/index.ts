@@ -20,6 +20,6 @@ App.use( Express.json() );
 
 App.use( "/", [ PrometheusRouter, VoteRouter ] );
 
-App.listen( process.env.PORT, () => {
+App.listen( process.env.PORT || 8080, () => {
     Logger.info( `Webserver listening on port ${ process.env.PORT }`, { source: "index.js" } );
 } );
