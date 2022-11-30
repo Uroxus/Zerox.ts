@@ -4,8 +4,8 @@
  */
 
 import { fetch } from "undici";
-import Environment from "../Constants/Environment";
-import Listings from "../Constants/Listings.js";
+import Environment from "../Constants/BotConfig/Environment";
+import Listings from "../Constants/BotConfig/Listings.js";
 import { Logger } from "../Utilities/Logger.js";
 import type { Client } from "oceanic.js";
 

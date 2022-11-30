@@ -4,7 +4,7 @@
  */
 
 import { createLogger } from "winston";
-import Environment from "../Constants/Environment";
+import Environment from "../Constants/BotConfig/Environment";
 
 import allFileTransport from "./Transports/AllLogFile.js";
 import consoleTransport from "./Transports/Console.js";
