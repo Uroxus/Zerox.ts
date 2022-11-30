@@ -1,7 +1,7 @@
 import { Command } from "../../Classes/Command.js";
 import { Message, AnyTextChannel, CommandInteraction, ComponentTypes } from "oceanic.js";
 import { Logger } from "../../Utilities/Logger.js";
-import DeleteParent from "../../Components/DeleteParent.js";
+import DeleteParentComponent from "../../Components/DeleteParent.js";
 
 export default class Test extends Command {
     constructor() {
@@ -14,7 +14,7 @@ export default class Test extends Command {
                 {
                     "type": ComponentTypes.ACTION_ROW,
                     "components": [
-                        DeleteParent.Definition
+                        new DeleteParentComponent().toJSON()
                     ]
                 }
             ]
@@ -29,7 +29,7 @@ export default class Test extends Command {
                 {
                     "type": ComponentTypes.ACTION_ROW,
                     "components": [
-                        DeleteParent.Definition
+                        new DeleteParentComponent( { "test": "what_happens", "hello": "boomer" } ).toJSON()
                     ]
                 }
             ]

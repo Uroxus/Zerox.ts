@@ -15,7 +15,7 @@ import type { CreateApplicationCommandOptions } from "oceanic.js";
 export async function loadApplicationCommands ( Client: BotClient ) {
     const CommandDefinitions = new Collection();
 
-    for await ( const file of fetchFiles( "./Commands/" ) ) {
+    for await ( const file of fetchFiles( "./Commands/Definitions/" ) ) {
         if ( file.includes( ".definition" ) ) {
             const { "default": CommandDefinition } = await import( file );
             //TODO: Handle the scenario where a .definition file is an array of various definitions and not a single structure object

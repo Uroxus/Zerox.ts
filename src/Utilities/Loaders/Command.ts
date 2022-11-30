@@ -13,7 +13,7 @@ import type BotClient from "../../Classes/Client.js";
  * @param Client 
  */
 export async function loadCommands ( Client: BotClient ) {
-    for await ( const file of fetchFiles( "./Commands/" ) ) {
+    for await ( const file of fetchFiles( "./Commands/Handlers" ) ) {
         if ( file.includes( ".handler" ) ) {
             const { "default": CommandFile } = await import( file );
 
