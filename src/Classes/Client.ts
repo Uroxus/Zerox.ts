@@ -1,11 +1,11 @@
 import { Client, Collection } from "oceanic.js";
-import ClientOptions from "../Constants/ClientOptions.js";
+import ClientOptions from "../Constants/BotConfig/BotConfig/ClientOptions.js";
 import Database from "./Database.js";
 import { loadEvents } from "../Utilities/Loaders/Event.js";
 import { loadCommands } from "../Utilities/Loaders/Command.js";
 import { loadComponents } from "../Utilities/Loaders/Components.js";
 import type { Command } from "./Command.js";
-import Environment from "../Constants/Environment.js";
+import Environment from "../Constants/BotConfig/Environment.js";
 
 export default class BotClient extends Client {
     public Database: Database;

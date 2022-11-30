@@ -1,4 +1,4 @@
-import { EmbedColors } from "../Constants/EmbedColors.js";
+import { EmbedColors } from "../Constants/BotConfig/EmbedColors.js";
 import type { EmbedField, EmbedOptions } from "oceanic.js";
 
 export default class EmbedBuilder {
