@@ -42,14 +42,20 @@ export default class InteractionCreate extends Event {
                 }
             case InteractionTypes.MESSAGE_COMPONENT:
                 const ComponentInteraction: ComponentInteraction = Interaction;
+                const [ customID, paramString ] = Interaction.data.customID.split( "?" );
 
-                if ( Client.ComponentMap.has( Interaction.data.customID ) ) {
-                    componentCommandCount.inc( { "name": ComponentInteraction.data.customID } );
-                    Client.ComponentMap.get( ComponentInteraction.data.customID )( ComponentInteraction );
+                const params = paramString.split( "," );
+                const paramObject = params.reduce( ( obj, keyValuePair, index ) => {
+                    const [ key, value ] = keyValuePair.split( "=" );
+                    return { ...obj, [ key ]: value };
+                }, {} );
+
+                if ( Client.ComponentMap.has( customID ) ) {
+                    componentCommandCount.inc( { "name": customID } );
+                    Client.ComponentMap.get( customID )( ComponentInteraction, paramObject );
                 } else {
                     Logger.error( `Component Interaction ${ Interaction.data.customID } received with no handler`, { source: "interactionCreate.js" } );
                 }
-
                 break;
         }
     }
