@@ -62,12 +62,12 @@ export default class InteractionCreate extends Event {
 }
 
 function commandCacheKey ( interactionArgs: any ) {
-    return interactionArgs[ "COMMAND" ] + ( interactionArgs[ "SUB_COMMAND_GROUP" ] || '' ) + ( interactionArgs[ "SUB_COMMAND" ] || '' );
+    return `${ interactionArgs[ "COMMAND" ] }${ ( interactionArgs[ "SUB_COMMAND_GROUP" ] ? ' ' + interactionArgs[ "SUB_COMMAND_GROUP" ] : '' ) }${ ( interactionArgs[ "SUB_COMMAND" ] ? ' ' + interactionArgs[ "SUB_COMMAND" ] : '' ) }`;
 }
 
 function getCommandOptions ( options: any, extractedValues: { COMMAND: string, RESOLVED: ApplicationCommandInteractionResolvedData | undefined; } ) {
     try {
-        for ( const option of options ) {
+        for ( const option of options.raw ) {
             if ( option[ "type" ] === ApplicationCommandOptionTypes.SUB_COMMAND ) {
                 extractedValues[ "SUB_COMMAND" ] = option[ "name" ];
             } else if ( option[ "type" ] === ApplicationCommandOptionTypes.SUB_COMMAND_GROUP ) {
