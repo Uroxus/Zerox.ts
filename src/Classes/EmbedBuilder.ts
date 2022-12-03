@@ -88,7 +88,7 @@ export default class EmbedBuilder {
     };
 
     timestamp () {
-        this.embed.timestamp = new Date().toString();
+        this.embed.timestamp = new Date().toISOString();
         return this;
     }
 
