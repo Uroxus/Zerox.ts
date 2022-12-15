@@ -66,8 +66,10 @@ function commandCacheKey ( interactionArgs: any ) {
 }
 
 function getCommandOptions ( options: any, extractedValues: { COMMAND: string, RESOLVED: ApplicationCommandInteractionResolvedData | undefined; } ) {
+    options = options.raw || options;
+
     try {
-        for ( const option of options.raw ) {
+        for ( const option of options ) {
             if ( option[ "type" ] === ApplicationCommandOptionTypes.SUB_COMMAND ) {
                 extractedValues[ "SUB_COMMAND" ] = option[ "name" ];
             } else if ( option[ "type" ] === ApplicationCommandOptionTypes.SUB_COMMAND_GROUP ) {
